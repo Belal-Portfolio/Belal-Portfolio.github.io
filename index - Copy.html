@@ -6,7 +6,398 @@
   <title>Belal Salama | Motion Designer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belal Salama | Motion Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
+    /* --- قواعد عامة --- */
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      /* لضمان عدم تغطية المحتوى بواسطة الـ Navbar الثابت */
+      padding-top: 60px;
+    }
+
+    /* --- Navbar ثابت مع شعار وروابط --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffa447;
+    }
+    .navbar .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 10px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .navbar .nav-links a:hover {
+      color: #ffa447;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar .nav-links {
+        margin-top: 10px;
+      }
+      .navbar .nav-links a {
+        margin: 5px;
+      }
+    }
+
+    /* --- header --- */
+    header {
+      padding: 80px 20px;
+      text-align: center;
+      background-color: #111;
+      /* لضمان ظهور الـ header تحت الـ Navbar */
+      margin-top: 0;
+    }
+    header h1 {
+      font-size: 48px;
+      color: #ffa447;
+    }
+    header p {
+      font-size: 20px;
+      color: #ccc;
+      margin: 15px 0 25px;
+    }
+    .btn {
+      background-color: #ffa447;
+      color: #0f0f0f;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover {
+      background-color: #ff8c1a;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      color: #ffa447;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    p {
+      color: #ccc;
+      font-size: 18px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .portfolio-item {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+    }
+    .portfolio-item img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      gap: 20px;
+    }
+    .social-icons a {
+      color: #ffa447;
+      font-size: 28px;
+      transition: transform 0.3s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: #ff8c1a;
+    }
+    .toggle-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .portfolio-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+      height: 0;
+      overflow: hidden;
+    }
+    .portfolio-section.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      height: auto;
+      margin-top: 40px;
+    }
+    footer {
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #777;
+      font-size: 14px;
+    }
+    /* تخطيط عرض الفيديو الرئيسي مع قائمة الفيديوهات المصغرة */
+    .video-display-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .main-video {
+      flex: 2;
+    }
+    .main-video iframe {
+      width: 100%;
+      height: 500px; /* يمكنك تعديل الارتفاع حسب الحاجة */
+      border: 0;
+      border-radius: 12px;
+    }
+    .video-thumbnails {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .video-thumbnails .thumbnail {
+      cursor: pointer;
+    }
+    .video-thumbnails .thumbnail iframe {
+      width: 100%;
+      height: 150px; /* حجم أكبر للفيديو المصغر */
+      border: 0;
+      border-radius: 8px;
+      pointer-events: none; /* منع تداخل النقر داخل الـ iframe */
+      transition: transform 0.3s;
+    }
+    .video-thumbnails .thumbnail:hover iframe {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar ثابت مع شعار وروابط للأقسام -->
+  <nav class="navbar">
+    <div class="logo">Belal Salama</div>
+    <div class="nav-links">
+      <a href="#about">About Me</a>
+      <a href="#mywork">My Work</a>
+      <a href="#contactMe">Contact</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Belal Salama</h1>
+    <p>Motion Graphics Designer & Video Editor</p>
+    <a href="#mywork"><button class="btn">View My Work</button></a>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I am a Motion Graphics Designer and Video Editor with extensive experience in creating dynamic motion designs and video editing. I have worked on impactful projects across the Arab world, from Egypt, Saudi Arabia, and the UAE to other countries, helping brands and creators bring their visions to life through dynamic visuals and engaging storytelling.</p>
+  </section>
+
+  <section id="mywork">
+    <h2>My Work</h2>
+    <div class="toggle-buttons">
+      <button class="btn" onclick="showSection('motion')">Motion Graphics</button>
+      <button class="btn" onclick="showSection('editing')">Video Editing</button>
+    </div>
+
+    <!-- قسم Motion Graphics -->
+    <div id="motion" class="portfolio-section">
+      <h3 style="color: #ffa447; text-align:center;">Motion Graphics Projects</h3>
+      <div class="video-display-container">
+        <!-- الفيديو الرئيسي -->
+        <div class="main-video">
+          <iframe id="mainVideo"
+            src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479"
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+            title="Takween - Animation">
+          </iframe>
+        </div>
+        <!-- الفيديوهات المصغرة -->
+        <div class="video-thumbnails">
+          <div class="thumbnail" onclick="changeVideo('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video 1">
+            </iframe>
+          </div>
+          <div class="thumbnail" onclick="changeVideo('https://player.vimeo.com/video/1012419467?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1012419467?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video 2">
+            </iframe>
+          </div>
+          <!-- يمكن إضافة المزيد من الفيديوهات المصغرة -->
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم Video Editing بنفس التخطيط -->
+    <div id="editing" class="portfolio-section">
+      <h3 style="color: #ffa447; text-align:center;">Video Editing Projects</h3>
+      <div class="video-display-container">
+        <!-- الفيديو الرئيسي لقسم Video Editing -->
+        <div class="main-video">
+          <iframe id="mainVideoEditing"
+            src="https://player.vimeo.com/video/1122334455?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479"
+            loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+            title="Video Editing Project 1">
+          </iframe>
+        </div>
+        <!-- الفيديوهات المصغرة لقسم Video Editing -->
+        <div class="video-thumbnails">
+          <div class="thumbnail" onclick="changeVideoEditing('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video Editing 1">
+            </iframe>
+          </div>
+          <div class="thumbnail" onclick="changeVideoEditing('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video Editing 2">
+            </iframe>
+          </div>
+          <div class="thumbnail" onclick="changeVideoEditing('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video Editing 1">
+            </iframe>
+          </div>
+          <div class="thumbnail" onclick="changeVideoEditing('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video Editing 1">
+            </iframe>
+          </div>
+          <div class="thumbnail" onclick="changeVideoEditing('https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479')">
+            <iframe src="https://player.vimeo.com/video/1020295111?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;autoplay=0&amp;player_id=0&amp;app_id=58479&amp;background=1" 
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              title="Video Editing 1">
+            </iframe>
+          </div>
+          <!-- يمكنك إضافة المزيد من الفيديوهات المصغرة لقسم Video Editing -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contactMe">
+    <h2>Contact Me</h2>
+    <p style="text-align: center;">Let’s create something amazing together! Reach me via:</p>
+    <div class="contact-links">
+      <a href="mailto:your-belalsalama52@gmail.com" class="btn">Email</a>
+      <a href="https://wa.me/qr/GBNHKEGV3WLSF1" target="_blank" class="btn">WhatsApp</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://www.tiktok.com/@belals.alama?_t=ZS-8vGfITcEDAO&_r=1" target="_blank" title="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.instagram.com/belals.alama?igsh=dm9ob2ZodDB0OXox" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/belal-salama?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+      <a href="https://www.behance.net/belal-salama" target="_blank" title="Behance"><i class="bi bi-behance"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Belal Salama. All Rights Reserved.
+  </footer>
+
+  <script>
+    // تغيير الحالة لعرض قسم المشاريع المناسب
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.portfolio-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+    // تغيير الفيديو الرئيسي لقسم Motion Graphics
+    function changeVideo(videoUrl) {
+      document.getElementById('mainVideo').src = videoUrl;
+    }
+    // تغيير الفيديو الرئيسي لقسم Video Editing
+    function changeVideoEditing(videoUrl) {
+      document.getElementById('mainVideoEditing').src = videoUrl;
+    }
+    
+    // تغيير خلفية الـ Navbar أثناء التمرير (micro-interaction)
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.backgroundColor = "#0f0f0f";
+      } else {
+        navbar.style.backgroundColor = "#111";
+      }
+    });
+  </script>
+</body>
+</html>
+
     /* --- قواعد عامة --- */
     * {
       box-sizing: border-box;
