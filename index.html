@@ -243,8 +243,11 @@
         overflow-x: auto;
         max-height: none;
       }
+      /* تعديل حجم الفيديوهات المصغرة على الموبايل */
       .video-thumbnails .thumbnail iframe {
-        height: 120px; /* تعديل ارتفاع الفيديو المصغر */
+        height: 160px; /* زيادة ارتفاع الفيديو المصغر */
+        min-width: 200px; /* زيادة العرض الافتراضي */
+        margin: 0 5px;
       }
     }
   </style>
