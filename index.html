@@ -15,8 +15,8 @@
     }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0f0f0f;
-      color: #fff;
+      background-color: #1a1a1a; /* خلفية أغمق قليلاً لتحسين التباين */
+      color: #e0e0e0;
       scroll-behavior: smooth;
       line-height: 1.6;
       /* لضمان عدم تغطية المحتوى بواسطة الـ Navbar الثابت */
@@ -28,12 +28,12 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: #111;
+      background-color: #222; /* تغيير بسيط للون الخلفية */
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       z-index: 1000;
       transition: background-color 0.3s ease;
     }
@@ -44,7 +44,7 @@
     }
     .navbar .nav-links a {
       text-decoration: none;
-      color: #fff;
+      color: #e0e0e0;
       margin: 0 10px;
       font-weight: 600;
       transition: color 0.3s ease;
@@ -68,13 +68,13 @@
     header {
       padding: 80px 20px;
       text-align: center;
-      background-color: #111;
-      /* لضمان ظهور الـ header تحت الـ Navbar */
+      background: linear-gradient(135deg, #222, #111); /* تأثير تدريجي للخلفية */
       margin-top: 0;
     }
     header h1 {
       font-size: 48px;
       color: #ffa447;
+      margin-bottom: 10px;
     }
     header p {
       font-size: 20px;
@@ -83,19 +83,20 @@
     }
     .btn {
       background-color: #ffa447;
-      color: #0f0f0f;
+      color: #1a1a1a;
       padding: 14px 28px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       font-weight: 600;
       font-size: 16px;
-      transition: 0.3s;
+      transition: background-color 0.3s ease, transform 0.2s ease;
       text-decoration: none;
       display: inline-block;
     }
     .btn:hover {
       background-color: #ff8c1a;
+      transform: translateY(-2px);
     }
     section {
       padding: 60px 20px;
@@ -119,14 +120,15 @@
       margin-top: 30px;
     }
     .portfolio-item {
-      background-color: #1a1a1a;
+      background-color: #242424;
       padding: 20px;
       border-radius: 16px;
       text-align: center;
-      transition: 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .portfolio-item:hover {
       transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
     .portfolio-item img {
       width: 100%;
@@ -149,7 +151,7 @@
     .social-icons a {
       color: #ffa447;
       font-size: 28px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, color 0.3s ease;
     }
     .social-icons a:hover {
       transform: scale(1.2);
@@ -180,7 +182,7 @@
       margin: 0 auto;
       text-align: center;
       padding: 20px;
-      background-color: #111;
+      background-color: #222;
       color: #777;
       font-size: 14px;
     }
@@ -198,6 +200,10 @@
       height: 500px; /* يمكنك تعديل الارتفاع حسب الحاجة */
       border: 0;
       border-radius: 12px;
+      transition: box-shadow 0.3s ease;
+    }
+    .main-video iframe:hover {
+      box-shadow: 0 0 15px rgba(255, 164, 71, 0.7);
     }
     .video-thumbnails {
       flex: 1;
@@ -215,11 +221,31 @@
       height: 150px; /* حجم أكبر للفيديو المصغر */
       border: 0;
       border-radius: 8px;
-      pointer-events: none; /* منع تداخل النقر داخل الـ iframe */
-      transition: transform 0.3s;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0.9;
     }
     .video-thumbnails .thumbnail:hover iframe {
       transform: scale(1.05);
+      opacity: 1;
+    }
+    
+    /* تحسين التنسيق على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .video-display-container {
+        flex-direction: column;
+      }
+      .main-video iframe {
+        height: 300px; /* تعديل الارتفاع للفيديو الرئيسي */
+      }
+      .video-thumbnails {
+        flex-direction: row;
+        overflow-x: auto;
+        max-height: none;
+      }
+      .video-thumbnails .thumbnail iframe {
+        height: 120px; /* تعديل ارتفاع الفيديو المصغر */
+      }
     }
   </style>
 </head>
@@ -381,9 +407,9 @@
     window.addEventListener('scroll', function() {
       const navbar = document.querySelector('.navbar');
       if (window.scrollY > 50) {
-        navbar.style.backgroundColor = "#0f0f0f";
-      } else {
         navbar.style.backgroundColor = "#111";
+      } else {
+        navbar.style.backgroundColor = "#222";
       }
     });
   </script>
